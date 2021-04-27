@@ -35,10 +35,12 @@
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:minHeight="100dp"
             android:minWidth="100dp"
+            android:textSize="24sp"
+            android:gravity="center"
+            android:layout_margin="8dp"
             app:layout_constraintTop_toBottomOf="@id/image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/agent_image"
@@ -47,22 +49,26 @@
 
         <TextView
             android:id="@+id/address"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:minHeight="100dp"
+            android:lines="2"
+            android:ellipsize="marquee"
             android:minWidth="100dp"
-            app:layout_constraintTop_toBottomOf="@id/title"
+            android:layout_margin="8dp"
+            android:text="@{data.location.address}"
+            app:layout_constraintBottom_toTopOf="@id/details"
+            app:layout_constraintEnd_toStartOf="@+id/agent_image"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/agent_name"
-            app:layout_constraintBottom_toTopOf="@id/detail"
-            android:text="@{data.location.address}"/>
+            app:layout_constraintTop_toBottomOf="@id/title" />
 
         <TextView
-            android:id="@+id/detail"
-            android:layout_width="wrap_content"
+            android:id="@+id/details"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:minHeight="100dp"
             android:minWidth="100dp"
+            android:gravity="center"
+            android:layout_margin="8dp"
+            android:text="@{String.format(@string/details_text, data.bedrooms, data.bathrooms, data.carspaces)}"
             app:layout_constraintTop_toBottomOf="@id/address"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/agent_name"
@@ -70,14 +76,15 @@
 
         <ImageView
             android:id="@+id/agent_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:scaleType="fitXY"
+            android:layout_margin="16dp"
             app:layout_constraintTop_toBottomOf="@id/image"
-            app:layout_constraintStart_toEndOf="@id/title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/agent_name"
             android:adjustViewBounds="true"
+            android:foreground="@drawable/rounded_fg"
             app:agentImageUrl="@{data.agent.avatar.small.url}"
             android:background="@android:color/background_dark"
             tools:src="@tools:sample/backgrounds/scenic"/>
@@ -86,13 +93,13 @@
             android:id="@+id/agent_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minHeight="100dp"
             android:minWidth="100dp"
+            android:layout_margin="8dp"
+            android:gravity="center"
+            android:text="@{String.format(@string/name_text, data.agent.firstName, data.agent.lastName)}"
             app:layout_constraintTop_toBottomOf="@id/agent_image"
             app:layout_constraintStart_toEndOf="@id/address"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:text="@{data.agent.firstName}"/>
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
