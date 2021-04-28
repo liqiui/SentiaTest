@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.sentiatest.R
 import com.example.sentiatest.data.Data
+import com.example.sentiatest.ui.DataAdapter
 
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView,

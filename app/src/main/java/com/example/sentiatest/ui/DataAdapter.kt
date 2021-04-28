@@ -1,4 +1,4 @@
-package com.example.sentiatest.ui.home
+package com.example.sentiatest.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.sentiatest.data.Data
 import com.example.sentiatest.databinding.GridViewItemBinding
 
-class DataAdapter : ListAdapter<Data, DataAdapter.DataViewHolder>(DiffCallback) {
+class DataAdapter(private val onClickListener: OnClickListener) : ListAdapter<Data, DataAdapter.DataViewHolder>(DiffCallback) {
+    class OnClickListener(val clickListener: (data: Data) -> Unit) {
+        fun onClick( data: Data) = clickListener( data)
+    }
 
     class DataViewHolder(private var binding: GridViewItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(data: Data) {
@@ -23,6 +26,9 @@ class DataAdapter : ListAdapter<Data, DataAdapter.DataViewHolder>(DiffCallback) 
 
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
         val data = getItem(position)
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(data)
+        }
         holder.bind(data)
     }
 

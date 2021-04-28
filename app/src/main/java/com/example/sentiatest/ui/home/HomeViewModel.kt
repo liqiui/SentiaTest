@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.sentiatest.data.Data
 import com.example.sentiatest.data.Result
 import com.example.sentiatest.data.sampleData
 import com.example.sentiatest.network.Api
@@ -18,17 +19,25 @@ class HomeViewModel : ViewModel() {
 
     // The internal MutableLiveData Data that stores the most recent data
     private val _result = MutableLiveData<Result>()
+    private val _selectedData = MutableLiveData<Data?>()
 
     // The external immutable LiveData for the response Data
     val result: LiveData<Result>
         get() = _result
-
+    val selectedData: LiveData<Data?>
+        get() = _selectedData
     init {
 //        getDataFromSample()
 //        getDataFromSample()
         getDataFromNetworkCoroutine()
     }
+    fun displayDataDetails( photo: Data) {
+        _selectedData.value = photo
+    }
 
+    fun displayDataDetailComplete() {
+        _selectedData.value = null
+    }
     //getting data from local data for testing
     private fun getDataFromSample() {
         val moshi = Moshi.Builder()
