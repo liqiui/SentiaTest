@@ -3,10 +3,16 @@ package com.example.sentiatest.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.sentiatest.data.Result
 import com.example.sentiatest.data.sampleData
+import com.example.sentiatest.network.Api
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class HomeViewModel : ViewModel() {
 
@@ -18,9 +24,12 @@ class HomeViewModel : ViewModel() {
         get() = _result
 
     init {
-        getDataFromSample()
+//        getDataFromSample()
+//        getDataFromSample()
+        getDataFromNetworkCoroutine()
     }
 
+    //getting data from local data for testing
     private fun getDataFromSample() {
         val moshi = Moshi.Builder()
             .add(KotlinJsonAdapterFactory())
@@ -29,4 +38,31 @@ class HomeViewModel : ViewModel() {
         val sampleData = jsonAdapter.fromJson(sampleData)
         _result.value = sampleData ?: Result(emptyList())
     }
+
+    // callback version of getting data
+    private fun getDataFromNetwork() {
+        Api.retrofitService.getData().enqueue(
+            object: Callback<Result> {
+                override fun onResponse(call: Call<Result>, response: Response<Result>) {
+                    _result.value = response.body()
+                }
+
+                override fun onFailure(call: Call<Result>, t: Throwable) {
+                    _result.value = Result( emptyList())
+                }
+            }
+        )
+    }
+
+    // Coroutine version of getting data
+    private fun getDataFromNetworkCoroutine() {
+        viewModelScope.launch {
+            try {
+                _result.value = Api.retrofitService.getDataCoroutine()
+            } catch (e: Exception) {
+                _result.value = Result(emptyList())
+            }
+        }
+    }
+
 }
