@@ -1,5 +1,6 @@
 package com.example.sentiatest.ui.home
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -31,8 +32,9 @@ class HomeViewModel : ViewModel() {
 //        getDataFromSample()
         getDataFromNetworkCoroutine()
     }
-    fun displayDataDetails( photo: Data) {
-        _selectedData.value = photo
+
+    fun displayDataDetails(data: Data) {
+        _selectedData.value = data
     }
 
     fun displayDataDetailComplete() {

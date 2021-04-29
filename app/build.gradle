@@ -50,6 +50,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -68,4 +69,21 @@ dependencies {
     // Navigation
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.4'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.4'
+
+    // Unit testing
+    testImplementation 'org.jetbrains.kotlin:kotlin-reflect:1.4.10'
+    testImplementation "org.spekframework.spek2:spek-dsl-jvm:2.0.9"
+    testImplementation "org.spekframework.spek2:spek-runner-junit5:2.0.9"
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.3'
+
+
+//    testRuntimeOnly "org.junit.vintage:junit-vintage-engine:5.5.1"
+//    testImplementation "com.squareup.assertj:assertj-android:1.2.0"
+    testImplementation "org.assertj:assertj-core:3.15.0"
+
+    // Mocking for Kotlin
+    testImplementation "io.mockk:mockk:1.10.0"
+
+    // Timber Log
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 }
