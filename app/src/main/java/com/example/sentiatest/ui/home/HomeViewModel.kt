@@ -1,6 +1,5 @@
 package com.example.sentiatest.ui.home
 
-import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -29,7 +28,7 @@ class HomeViewModel : ViewModel() {
         get() = _selectedData
     init {
 //        getDataFromSample()
-//        getDataFromSample()
+//        getDataFromNetwork()
         getDataFromNetworkCoroutine()
     }
 
